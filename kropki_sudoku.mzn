@@ -13,6 +13,17 @@ array [INDICES,INDICES] of DIGITS: input;
 
 array[INDICES,INDICES] of var INDICES: out;
 
+%check n input
+constraint assert(n>1,"n must be greather than 1");
+
+%check point input
+constraint forall(k in index_set_1of2(points))(
+  assert (points[k,ROW1]>=0 /\ points[k,ROW1]<=n /\
+          points[k,COL1]>=0 /\ points[k,COL1]<=n /\
+          points[k,ROW2]>=0 /\ points[k,ROW2]<=n /\
+          points[k,COL2]>=0 /\ points[k,COL2]<=n,"Invalid point at row"++show_int(2,k))
+);
+
 %respect input matrix for assignment
 constraint forall(i in INDICES, j in INDICES)(
 if(input[i,j]!=0) then
