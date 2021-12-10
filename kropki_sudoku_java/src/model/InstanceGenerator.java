@@ -72,25 +72,6 @@ public class InstanceGenerator {
         return -1;
     }
 
-    public static Integer[] generateNewPoint(int n){
-        Random r = new Random();
-        int x = r.nextInt(n - 1) + 1;
-        int y = r.nextInt(n - 1) + 1;
-        //decidere se orizzontale o verticale (0-1)
-        boolean horizontal = r.nextBoolean();
-        // decidere se doppio o consecutivo (0-1) -- 0 per il doppio -- 1 per il consecutivo
-        int doubleOrConsecutive = r.nextInt(2);
-        int x2 = x;
-        int y2 = y;
-        if (horizontal) {
-            y2++;
-        } else x2++;
-        System.out.println("Adding point: "+x + " " + y + " " + x2 + " " + y2 + " " + doubleOrConsecutive);
-        Integer[] newPoint = {x,y,x2,y2,doubleOrConsecutive};
-        return newPoint;
-    }
-
-
     public static void instanceGenerator() {
 
         List<Integer[]> points = new ArrayList<>();
@@ -115,13 +96,11 @@ public class InstanceGenerator {
         int j = r.nextInt(n);
         int value = r.nextInt(n)+1;
         input[i][j] = value;
-        List<String> toWrite =writeMatrixOnFile(DUMMY_INPUT, n,input);
+        List<String> toWrite =writeMatrixOnFile(n,input);
 
         try {
             cleanFile(DUMMY_INPUT);
             saveOnFile(DUMMY_INPUT, toWrite);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -199,44 +178,38 @@ public class InstanceGenerator {
     }
 
 
-    private static List<String> writeMatrixOnFile(String fileName, int n, int[][] input) {
+    private static List<String> writeMatrixOnFile(int n, int[][] input) {
         List<String> toWrite = new ArrayList<>();
         toWrite.add("n="+n+";");
-        String matrix = "input=[|";
+        StringBuilder matrix = new StringBuilder("input=[|");
         for (int i=0 ; i < n; i++){
             for(int j=0; j < n-1; j++){
-                matrix+=input[i][j]+",";
+                matrix.append(input[i][j]).append(",");
             }
-            matrix+=input[i][n-1]+"|";
+            matrix.append(input[i][n - 1]).append("|");
         }
-        matrix+="];";
-        toWrite.add(matrix);
+        matrix.append("];");
+        toWrite.add(matrix.toString());
         return toWrite;
     }
 
     private static void writePointsOnFile(String fileName, int n, List<Integer[]> points) {
         List<String> toWrite = new ArrayList<>();
         toWrite.add("n="+n+";");
-        String matrix = "input=[|";
+        StringBuilder matrix = new StringBuilder("input=[|");
         for (int i=0 ; i < n; i++){
-            for(int j=0; j < n-1; j++){
-                matrix+="0,";
-            }
-            matrix+="0|";
+            matrix.append("0,".repeat(n - 1));
+            matrix.append("0|");
         }
-        matrix+="];";
-        toWrite.add(matrix);
+        matrix.append("];");
+        toWrite.add(matrix.toString());
 
-        String pointsString = "points=[|";
+        StringBuilder pointsString = new StringBuilder("points=[|");
         for (Integer[] point : points){
-            pointsString+=point[0].toString()+","+
-                    point[1].toString()+","+
-                    point[2].toString()+","+
-                    point[3].toString()+","+
-                    point[4].toString()+"|";
+            pointsString.append(point[0].toString()).append(",").append(point[1].toString()).append(",").append(point[2].toString()).append(",").append(point[3].toString()).append(",").append(point[4].toString()).append("|");
         }
-        pointsString+="];";
-        toWrite.add(pointsString);
+        pointsString.append("];");
+        toWrite.add(pointsString.toString());
 
         System.out.println(toWrite);
 

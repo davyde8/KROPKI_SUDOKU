@@ -10,14 +10,14 @@ public class KropkiSudoku {
     public static final String PATH = "resources/data/kropki_sudoku_data_";
     public static final String SOLVER_PATH = "resources/model/kropki_sudoku.mzn";
     public static final String EXTENSION = ".dzn";
-    public int id;
+    public String id;
     private int[][] initialMatrix;
     private int[][] solvedMatrix;
     private int n;
     private List<Integer[]> points;
 
     // PRIVATE UTILITY FUNCTIONS ***************************************************************************************
-    private String[] read(int id) throws  IOException{
+    private String[] read(String id) throws  IOException{
         File f = new File(PATH + id + EXTENSION);
 
         BufferedReader reader = new BufferedReader(new FileReader(f));
@@ -38,16 +38,15 @@ public class KropkiSudoku {
 
         String newS;
         newS= s.replaceAll("\\n+","");
-        String[] splitted = newS.split(";");
 
-        return splitted;
+        return newS.split(";");
     }
 
     private String[] split (String s){
         int equals = s.indexOf('=');
-        s = s.substring(equals+1, s.length());
+        s = s.substring(equals+1);
         s = s.replaceAll("\\[\\|","");
-        s = s.replaceAll("\\|\\]","");
+        s = s.replaceAll("\\|]","");
         s = s.replaceAll(";","");
         return s.split("\\|");
     }
@@ -56,7 +55,7 @@ public class KropkiSudoku {
 
     // CONSTRUCTORS AND INIT PHASE *************************************************************************************
 
-    public KropkiSudoku(int id) {
+    public KropkiSudoku(String id) {
         this.id = id;
         this.initAll();
 
@@ -129,15 +128,18 @@ public class KropkiSudoku {
 
     // END CONSTRUCTORS AND INIT PHASE *********************************************************************************
 
-    public int generateRandomFromList() {
+    public String generateRandomFromList() {
 
         File folder = new File("resources/data");
         File[] listOfFiles = folder.listFiles();
         Random r = new Random();
-        return r.nextInt(listOfFiles.length);
+        return extractId(listOfFiles[r.nextInt(listOfFiles.length)]);
 
     }
 
+    private static String extractId(File file) {
+        return file.getName().replaceAll("kropki_sudoku_data_","").replaceAll(".dzn","");
+    }
 
 
     /*
@@ -251,7 +253,7 @@ public class KropkiSudoku {
 
     public static void main(String[] args) {
         System.out.println("OK");
-        KropkiSudoku ks = new KropkiSudoku(3);
+        KropkiSudoku ks = new KropkiSudoku("10122021235858");
         int[][] myMatrix = ks.getInitialMatrix();
         printMatrix(myMatrix);
         while (!ks.isComplete(myMatrix)){

@@ -33,15 +33,13 @@ public class MinizincUtility {
             StringBuilder output = new StringBuilder();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             while ((line = reader.readLine()) != null) {
-                output.append(line + "\n");
+                output.append(line).append("\n");
             }
-            System.out.println("output.toString() = " + output.toString());
+            System.out.println("output.toString() = " + output);
             result = output.toString();
 
             process.waitFor();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
         return manageMinizincResult(result, n);
