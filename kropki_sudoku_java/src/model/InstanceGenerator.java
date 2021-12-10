@@ -51,6 +51,7 @@ public class InstanceGenerator {
         System.out.println("Adding point: "+x + " " + y + " " + x2 + " " + y2 + " " + doubleOrConsecutive);
         Integer[] newPoint = {x,y,x2,y2,doubleOrConsecutive};
         points.add(newPoint);
+
         List<String> toWrite = new ArrayList<>();
         toWrite.add("n="+n+";");
         String matrix = "input=[|";
@@ -62,6 +63,7 @@ public class InstanceGenerator {
         }
         matrix+="];";
         toWrite.add(matrix);
+
         String pointsString = "points=[|";
         for (Integer[] point : points){
             pointsString+=point[0].toString()+","+
@@ -73,24 +75,32 @@ public class InstanceGenerator {
         pointsString+="];";
         toWrite.add(pointsString);
 
+        System.out.println(toWrite);
 
+        try {
+            salvaSuFile(fileName,toWrite);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void salvaSuFile(String filename, List<String> toWrite) throws IOException {
+
+        BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
+        for(String l : toWrite){
+                bw.append(l);
+                bw.newLine();
+        }
+        bw.close();
     }
 
     public void cleanFile(String filename){
         //TODO
     }
 
-    public void salvaSuFile(String filename, String[] content) throws IOException {
-
-        BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
-        for (int i=0 ; i < content.length; i++){
-            bw.append(content[i]);
-            bw.newLine();
-        }
-        bw.close();
-
-    }
 
     public static void main(String[] args) {
+        instanceGenerator();
+
     }
 }
