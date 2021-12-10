@@ -173,6 +173,11 @@ public class InstanceGenerator {
         int validationResult = validateOnMinizinc(fileName);
         // if validationResult != 1
             // rifai
+        try {
+            cleanFile(DUMMY_INPUT);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
 
     }
