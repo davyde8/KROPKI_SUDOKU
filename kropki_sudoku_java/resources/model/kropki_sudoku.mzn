@@ -59,5 +59,5 @@ constraint forall(i in 1..n-1, j in INDICES)(
 solve satisfy;
 
 output[
-show_int(2,out[i,j]) ++ if j==n then "\n" else " " endif | i in INDICES,j in INDICES
+show_int(2,out[i,j]) ++ if j==n then "\n" else "," endif | i in INDICES,j in INDICES
 ];
