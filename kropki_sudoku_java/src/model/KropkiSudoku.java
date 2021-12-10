@@ -97,7 +97,7 @@ public class KropkiSudoku {
 
         }
 
-        callMiniZinc();
+        this.solvedMatrix = MinizincUtility.callMiniZinc(SOLVER_PATH, PATH+id+EXTENSION,n);
     }
 
 
@@ -140,7 +140,7 @@ public class KropkiSudoku {
 
 
 
-
+    /*
 
     public void callMiniZinc(){
 
@@ -197,7 +197,7 @@ public class KropkiSudoku {
             i++;
         }
     }
-
+    */
     public int[][] sendSolvedSudoku(){
         return this.solvedMatrix;
     }
