@@ -151,7 +151,7 @@ public class KropkiSudoku {
             // Questo si può togliere perché tanto è uguale in tutti gli OS
 
             if(System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
-                process = Runtime.getRuntime().exec("minizinc "+ SOLVER_PATH+" "+PATH+this.id+EXTENSION);
+                process = Runtime.getRuntime().exec("minizinc --solver COIN-BC "+ SOLVER_PATH+" "+PATH+this.id+EXTENSION);
             }
             else if(System.getProperty("os.name").contains("Windows")) {
                 System.out.println("Installa linux ;)");
