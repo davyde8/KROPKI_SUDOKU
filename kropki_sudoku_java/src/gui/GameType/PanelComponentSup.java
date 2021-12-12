@@ -2,23 +2,57 @@ package gui.GameType;
 
 import gui.Dimensioni.Dimensioni;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class PanelComponentSup extends JPanel {
+
+    String path="/gui/GameType/";
+    private JButton check;
+    private JButton hint;
+    private JButton solve;
+
     public PanelComponentSup(){
         this.setLayout(new BoxLayout(this,BoxLayout.LINE_AXIS));
         Component rigidArea = Box. createRigidArea(new Dimension(0, (Dimensioni.HEIGHT/100)*20 ));
         this.add(rigidArea);
-        JButton check=new JButton("CHECK");
+        check = impostaBottone("check.png");
         this.add(check);
         rigidArea = Box. createRigidArea(new Dimension((Dimensioni.WIDTH/100)*5,0 ));
         this.add(rigidArea);
-        JButton hint=new JButton("HINT");
+        hint = impostaBottone("Hint.png");
         this.add(hint);
         rigidArea = Box. createRigidArea(new Dimension((Dimensioni.WIDTH/100)*5,0 ));
         this.add(rigidArea);
-        JButton solve=new JButton("SOLVE");
+        solve=impostaBottone("solve.png");
         this.add(solve);
     }
+
+
+
+    public ImageIcon getIcona (String nameImg) {
+        Image scalata=null;
+        ImageIcon icona=null;
+        try {
+            BufferedImage legge = ImageIO.read(getClass().getResourceAsStream(path+nameImg));
+            scalata = legge.getScaledInstance((Dimensioni.WIDTH/100)*15,(Dimensioni.HEIGHT/100)*7,Image.SCALE_SMOOTH);
+            icona = new ImageIcon (scalata);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return icona;
+    }
+
+    public JButton impostaBottone(String icona) {
+        ImageIcon icon = getIcona(icona);
+        JButton b = new JButton (icon);
+        b.setBorder(null);
+        b.setContentAreaFilled(false);
+        return b;
+    }
+
+
 }

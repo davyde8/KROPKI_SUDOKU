@@ -9,6 +9,8 @@ import java.awt.geom.Ellipse2D;
 
 public class RoundButton extends JButton {
 
+    private boolean flagDestroy=false;
+
     public RoundButton(String label) {
         super(label);
         this.setEnabled(false);
@@ -38,8 +40,14 @@ public class RoundButton extends JButton {
     }
 
     protected void paintBorder(Graphics g) {
-        g.setColor(Color.darkGray);
-        g.drawOval(0, 0, getSize().width - 1, getSize().height - 1);
+        if(flagDestroy){
+            g.setColor(new Color(238,238,238));
+            g.drawOval(0, 0, getSize().width - 1, getSize().height - 1);
+        }
+        else {
+            g.setColor(Color.darkGray);
+            g.drawOval(0, 0, getSize().width - 1, getSize().height - 1);
+        }
     }
 
     // Hit detection.
@@ -51,5 +59,9 @@ public class RoundButton extends JButton {
             shape = new Ellipse2D.Float(0, 0, getWidth(), getHeight());
         }
         return shape.contains(x, y);
+    }
+
+    public void setDestroy(boolean flag){
+        flagDestroy=flag;
     }
 }

@@ -4,50 +4,95 @@ import gui.Dimensioni.Dimensioni;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class ComponentMatrix extends JPanel {
 
     private JTextField numero;
-    private JButton cerchioDestra;
-    private JButton cerchioSotto;
+    private RoundButton cerchioDestra;
+    private RoundButton cerchioSotto;
 
 
     public ComponentMatrix(){
         this.setLayout(new GridBagLayout());
-        this.setBackground(Color.BLUE);
         GridBagConstraints c = new GridBagConstraints();
 
         numero=new JTextField();
-        numero.setPreferredSize(new Dimension(20, 50));
+
+        numero.setDocument(new LengthRestrict(1));
+        numero.setHorizontalAlignment(JTextField.CENTER);
+        numero.setPreferredSize(new Dimension((Dimensioni.WIDTH/100)*5, (Dimensioni.HEIGHT/100)*5));
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0;
         c.gridx = 0;
         c.gridy = 0;
         this.add(numero, c);
 
         cerchioDestra=new RoundButton("");
-        cerchioDestra.setPreferredSize(new Dimension(10, 10));
-        c.weightx = -5;
+        cerchioDestra.setPreferredSize(new Dimension(((Dimensioni.WIDTH/100)*2)-2, ((Dimensioni.HEIGHT/100)*2)-2));
         c.gridx = 1;
         c.gridy = 0;
         this.add(cerchioDestra, c);
+
+        JPanel supporto=new JPanel();
+        cerchioSotto=new RoundButton("");
+        cerchioSotto.setPreferredSize(new Dimension(((Dimensioni.WIDTH/100)*2)-2, ((Dimensioni.HEIGHT/100)*2)-2));
+        c.gridx = 0;
+        c.gridy = 1;
+        supporto.add(cerchioSotto);
+        this.add(supporto,c);
+
+        numero.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                System.out.println();
+
+                try {
+                    int numero=Integer.parseInt(e.getKeyChar()+"");
+                    System.out.println(numero);
+                }
+                catch (Exception ex){
+
+                }
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+
     }
 
-        /*
-        numero=new JTextField();
+    public void setBackgroundCerchioDestra(Color c){
+        cerchioDestra.setBackground(c);
+    }
 
-        cerchioDestra=new RoundButton("");
-        cerchioSotto=new RoundButton("");
+    public void setBackgroundCerchioSotto(Color c){
+        cerchioSotto.setBackground(c);
+    }
 
-        cerchioDestra.setBackground(Color.RED);
-        cerchioSotto.setBackground(Color.BLUE);
+    public void settaInvisibileDestra(){
+        cerchioDestra.setVisible(false);
+    }
+    public void settaInvisibileSotto(){
+        cerchioSotto.setVisible(false);
+    }
 
-        GridLayout griglia=new GridLayout(2,2);
-        this.setLayout(griglia);
+    public void settaNumero(String str){
+        numero.setText(str);
+    }
 
-        this.add(numero);
-        this.add(cerchioDestra);
-        this.add(cerchioSotto);
-        this.add(Box.createRigidArea(new Dimension((Dimensioni.WIDTH/150)*15,(Dimensioni.HEIGHT/150)*15)));
-        */
+    public void settaBorderNull(){
+        cerchioDestra.setDestroy(true);
+        cerchioDestra.setBorderPainted(false);
+        cerchioDestra.setContentAreaFilled(false);
+        cerchioDestra.setFocusPainted(false);
+        cerchioDestra.repaint();
+        cerchioDestra.revalidate();
+    }
 }
