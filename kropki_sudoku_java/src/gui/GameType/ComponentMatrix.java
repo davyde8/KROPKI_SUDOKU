@@ -12,9 +12,13 @@ public class ComponentMatrix extends JPanel {
     private JTextField numero;
     private RoundButton cerchioDestra;
     private RoundButton cerchioSotto;
+    private int coordinataI;
+    private int coordinataJ;
 
+    public ComponentMatrix(int i,int j){
+        this.coordinataI=i;
+        this.coordinataJ=j;
 
-    public ComponentMatrix(){
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -45,16 +49,16 @@ public class ComponentMatrix extends JPanel {
         numero.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                System.out.println();
-
                 try {
-                    int numero=Integer.parseInt(e.getKeyChar()+"");
-                    System.out.println(numero);
+                    System.out.println(e.getKeyChar()+"");
+                    if(!(e.getKeyChar()+""=="")) {
+                        int numeroLetto = Integer.parseInt(e.getKeyChar() + "");
+                        GameManager.getInstance().getUserInput()[j][i] = numeroLetto;
+                    }
                 }
                 catch (Exception ex){
-
+                    ex.printStackTrace();
                 }
-
             }
 
             @Override
@@ -65,34 +69,51 @@ public class ComponentMatrix extends JPanel {
             public void keyReleased(KeyEvent e) {
             }
         });
-
-    }
-
-    public void setBackgroundCerchioDestra(Color c){
-        cerchioDestra.setBackground(c);
-    }
-
-    public void setBackgroundCerchioSotto(Color c){
-        cerchioSotto.setBackground(c);
     }
 
     public void settaInvisibileDestra(){
-        cerchioDestra.setVisible(false);
+        this.cerchioDestra.setVisible(false);
     }
+
     public void settaInvisibileSotto(){
-        cerchioSotto.setVisible(false);
+        this.cerchioSotto.setVisible(false);
+    }
+
+    public void setBackgroundCerchioDestra(Color c){
+        if(c!=null) {
+            cerchioDestra.setBackground(c);
+        }
+        else{
+            settaBorderNull(true);
+        }
+    }
+
+    public void setBackgroundCerchioSotto(Color c){
+        if(c!=null) {
+            cerchioSotto.setBackground(c);
+        }
+        else{
+            settaBorderNull(false);
+        }
     }
 
     public void settaNumero(String str){
         numero.setText(str);
     }
 
-    public void settaBorderNull(){
-        cerchioDestra.setDestroy(true);
-        cerchioDestra.setBorderPainted(false);
-        cerchioDestra.setContentAreaFilled(false);
-        cerchioDestra.setFocusPainted(false);
-        cerchioDestra.repaint();
-        cerchioDestra.revalidate();
+    public void settaBorderNull(boolean direzione){
+        RoundButton tmp;
+        if(direzione==true){
+            tmp=cerchioDestra;
+        }
+        else{
+            tmp=cerchioSotto;
+        }
+        tmp.setDestroy(true);
+        tmp.setBorderPainted(false);
+        tmp.setContentAreaFilled(false);
+        tmp.setFocusPainted(false);
+        tmp.repaint();
+        tmp.revalidate();
     }
 }

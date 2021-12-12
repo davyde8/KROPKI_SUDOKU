@@ -5,12 +5,14 @@ import gui.GameType.PanelGenerateLevel;
 import gui.GameType.PanelListGame;
 import gui.Main.MainPanel;
 import gui.GameType.PanelRandomGame;
+import model.KropkiSudoku;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.regex.Pattern;
 
 public class MenuBottoni extends JButton implements MouseListener {
     public static boolean multiplayer=false;
@@ -62,13 +64,26 @@ public class MenuBottoni extends JButton implements MouseListener {
     public void mousePressed(MouseEvent e) {
         switch (indiceBottoni) {
             case 0 :
-                MainPanel.finestraPrincipale.setContentPane(new PanelRandomGame());
+                MainPanel.finestraPrincipale.setContentPane(new PanelRandomGame(new KropkiSudoku()));
                 MainPanel.finestraPrincipale.revalidate();
                 break;
 
             case 1 :
-                MainPanel.finestraPrincipale.setContentPane(new PanelListGame());
-                MainPanel.finestraPrincipale.revalidate();
+                String f="";
+                while(!f.contains("kropki_sudoku_data")) {
+                    JFileChooser fileChooser = new JFileChooser("resources/data");
+                    int n = fileChooser.showOpenDialog(MainPanel.finestraPrincipale);
+                    f = fileChooser.getSelectedFile().getName();
+                    if(!f.contains("kropki_sudoku_data")){
+                        JOptionPane.showMessageDialog(this,"The selected file is not valid!!");
+                    }
+                }
+
+                String id=f.replace("kropki_sudoku_data_","").replace(".dzn","");
+                System.out.println(id);
+
+                MainPanel.finestraPrincipale.setContentPane(new PanelListGame(new KropkiSudoku(id)));
+                //MainPanel.finestraPrincipale.revalidate();
                 break;
 
             case 2 :

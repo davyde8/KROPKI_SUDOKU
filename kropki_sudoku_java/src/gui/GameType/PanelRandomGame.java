@@ -1,14 +1,19 @@
 package gui.GameType;
 
 import gui.Dimensioni.Dimensioni;
+import model.KropkiSudoku;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class PanelRandomGame extends JPanel {
-    public PanelRandomGame(){
-        this.setLayout(new BorderLayout());
 
+    private KropkiSudoku kropkiSudoku;
+
+    public PanelRandomGame(KropkiSudoku kropkiSudoku){
+
+        this.setLayout(new BorderLayout());
+        this.kropkiSudoku=kropkiSudoku;
         JPanel provaSup=new JPanel();
         provaSup.setLayout(new BoxLayout(provaSup,BoxLayout.PAGE_AXIS));
 
@@ -23,18 +28,16 @@ public class PanelRandomGame extends JPanel {
         supporto.add(label, BorderLayout.CENTER);
 
         provaSup.add(supporto);
-        PanelComponentSup panelComponentSup=new PanelComponentSup();
+        PanelComponentSup panelComponentSup=new PanelComponentSup(kropkiSudoku);
         provaSup.add(panelComponentSup);
 
-        PanelMatrix panelMatrix=new PanelMatrix();
+        PanelMatrix panelMatrix=new PanelMatrix(kropkiSudoku.getInitialMatrix(),kropkiSudoku.getPoints(),kropkiSudoku.getN());
+
 
         //provaSup.add(panelMatrix);
 
         this.add(provaSup,BorderLayout.NORTH);
         this.add(panelMatrix,BorderLayout.CENTER);
-
-
-
     }
 
 

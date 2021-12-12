@@ -13,7 +13,7 @@ public class InstanceGenerator {
 
     public static final String MINIZINC_STATS = "minizinc --all-solutions -s ";
     public static final String MATRIX_COMPOSER = "resources/model/matrix_composer.mzn";
-    public static final String DUMMY_INPUT = "resources/data/dummy_data.dzn";
+    public static final String DUMMY_INPUT = "resources/dummy_data/dummy_data.dzn";
     public static final String STAT_NUMBER_OF_SOLUTIONS = "%%%mzn-stat: solutions=";
 
 

@@ -58,7 +58,6 @@ public class KropkiSudoku {
     public KropkiSudoku(String id) {
         this.id = id;
         this.initAll();
-
     }
 
     public KropkiSudoku(){
@@ -100,8 +99,6 @@ public class KropkiSudoku {
     }
 
 
-
-
     private void initPoints(String s) {
         this.points = new ArrayList<>();
         String newS= s.replaceAll("\\s+","");
@@ -117,8 +114,6 @@ public class KropkiSudoku {
             jElements=0;
         }
     }
-
-
 
     private int initN (String s){
         s = s.replaceAll("\\s+","");
@@ -141,65 +136,6 @@ public class KropkiSudoku {
         return file.getName().replaceAll("kropki_sudoku_data_","").replaceAll(".dzn","");
     }
 
-
-    /*
-
-    public void callMiniZinc(){
-
-        String line=null;
-        Process process = null;
-        try{
-
-            // Questo si può togliere perché tanto è uguale in tutti gli OS
-
-            if(System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
-                process = Runtime.getRuntime().exec("minizinc --solver COIN-BC "+ SOLVER_PATH+" "+PATH+this.id+EXTENSION);
-            }
-            else if(System.getProperty("os.name").contains("Windows")) {
-                System.out.println("Installa linux ;)");
-                process = Runtime.getRuntime().exec("minizinc "+ SOLVER_PATH+" "+PATH+this.id+EXTENSION);
-            }
-            else if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
-                process = Runtime.getRuntime().exec("minizinc "+ SOLVER_PATH+" "+PATH+this.id+EXTENSION);
-            }
-            else {
-                System.out.println("------------------------ ERRORE OS ------------------------------------");
-            }
-
-
-            StringBuilder output = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            while ((line = reader.readLine()) != null) {
-                output.append(line + "\n");
-            }
-            System.out.println("output.toString() = " + output.toString());
-            String result = output.toString();
-            manageMinizincResult(result);
-            process.waitFor();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void manageMinizincResult(String result) {
-        this.solvedMatrix = new int[this.n][this.n];
-        result= result.replaceAll("----------","");
-        String[] rows = result.split("\\n");
-        int i=0;
-        for(String row: rows){
-            String[] columns = row.split(",");
-            int j=0;
-            for (String column : columns){
-                column= column.replaceAll("\\s+","");
-                this.solvedMatrix[i][j] = Integer.parseInt(column);
-                j++;
-            }
-            i++;
-        }
-    }
-    */
     public int[][] sendSolvedSudoku(){
         return this.solvedMatrix;
     }
@@ -278,6 +214,14 @@ public class KropkiSudoku {
             System.out.print("\n");
         }
         System.out.println("--------------------------------------");
+    }
+
+    public List<Integer[]> getPoints(){
+        return this.points;
+    }
+
+    public int getN(){
+        return n;
     }
 }
 
