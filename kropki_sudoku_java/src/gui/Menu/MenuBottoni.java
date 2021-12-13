@@ -1,10 +1,12 @@
 package gui.Menu;
 
 import gui.Dimensioni.Dimensioni;
+import gui.GameType.GameManager;
 import gui.GameType.PanelGenerateLevel;
 import gui.GameType.PanelListGame;
 import gui.Main.MainPanel;
 import gui.GameType.PanelRandomGame;
+import model.InstanceGenerator;
 import model.KropkiSudoku;
 
 import javax.swing.*;
@@ -34,10 +36,10 @@ public class MenuBottoni extends JButton implements MouseListener {
                 this.setText("QUIT");
                 break;
         }
-        Border border = BorderFactory.createMatteBorder(5, 5, 5, 5, Color.BLACK);
+        Border border = BorderFactory.createMatteBorder(3, 3, 3, 3, Color.BLACK);
         this.setBorder(border);
         this.setMaximumSize(new Dimension(((Dimensioni.WIDTH / 100) * 30), ((Dimensioni.HEIGHT / 100) * 8)));
-        this.setBackground(Color.RED);
+        this.setBackground(new Color(103,187,234));
         this.setOpaque(true);
         this.setFont(new Font("Times New Roman", Font.BOLD, (Dimensioni.WIDTH / 100) * 2));
         addMouseListener(this);
@@ -69,6 +71,11 @@ public class MenuBottoni extends JButton implements MouseListener {
                 break;
 
             case 1 :
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                }catch(Exception ex) {
+                    ex.printStackTrace();
+                }
                 String f="";
                 while(!f.contains("kropki_sudoku_data")) {
                     JFileChooser fileChooser = new JFileChooser("resources/data");
@@ -87,10 +94,9 @@ public class MenuBottoni extends JButton implements MouseListener {
                 break;
 
             case 2 :
-                MainPanel.finestraPrincipale.setContentPane(new PanelGenerateLevel());
-                MainPanel.finestraPrincipale.revalidate();
+                String generated = InstanceGenerator.instanceGenerator();
+                JOptionPane.showMessageDialog(MainPanel.finestraPrincipale, "Generata Istanza: "+generated);
                 break;
-
             case 3 :
                 int res = JOptionPane.showConfirmDialog(null, "Sei sicuro di voler uscire dal gioco?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 if(res == JOptionPane.YES_OPTION)

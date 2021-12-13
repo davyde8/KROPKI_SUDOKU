@@ -14,10 +14,10 @@ public class MenuPrincipale extends JPanel {
 
     public MenuPrincipale(){
         try {
-            BufferedImage img = ImageIO.read(getClass().getResourceAsStream("menu.jpg"));
+            BufferedImage img = ImageIO.read(getClass().getResourceAsStream("menu.png"));
             this.setBackground(img);
             this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-            this.add(Box.createRigidArea(new Dimension(0,((Dimensioni.HEIGHT/100)*35))));
+            this.add(Box.createRigidArea(new Dimension(0,((Dimensioni.HEIGHT/100)*47))));
             for(int i=0; i <= 3; i++) {
                 MenuBottoni button = new MenuBottoni(i);
                 this.add(button);
@@ -39,7 +39,7 @@ public class MenuPrincipale extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        background = background.getScaledInstance(getSize().width,getSize().height, Image.SCALE_FAST);
+        background = background.getScaledInstance(getSize().width,getSize().height, Image.SCALE_SMOOTH);
         drawBackground(g);
     }
 

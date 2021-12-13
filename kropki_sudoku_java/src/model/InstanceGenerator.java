@@ -72,11 +72,11 @@ public class InstanceGenerator {
         return -1;
     }
 
-    public static void instanceGenerator() {
-
+    public static String instanceGenerator() {
+        String id =  LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyykkmmss"));
         List<Integer[]> points = new ArrayList<>();
         String fileName = "resources/data/kropki_sudoku_data_"+
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyykkmmss"))+".dzn";
+                id+".dzn";
         System.out.println(fileName);
         File f = new File(fileName);
         try {
@@ -179,7 +179,7 @@ public class InstanceGenerator {
             e.printStackTrace();
         }
 
-
+        return id;
     }
 
 

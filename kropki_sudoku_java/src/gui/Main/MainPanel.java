@@ -13,10 +13,12 @@ public class MainPanel {
         finestraPrincipale=finestra;
         MenuPrincipale p=new MenuPrincipale();
         finestra.add(p, BorderLayout.CENTER);
+        //finestra.setUndecorated(true);
         finestra.setSize(new Dimension(Dimensioni.WIDTH,Dimensioni.HEIGHT));
         finestra.setVisible(true);
         finestra.setLocationRelativeTo(null);
         finestra.setResizable(false);
         finestra.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 }

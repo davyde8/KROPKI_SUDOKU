@@ -2,7 +2,10 @@ package gui.ListenerButtonSup;
 
 import com.sun.tools.javac.Main;
 import gui.GameType.GameManager;
+import gui.GameType.PanelListGame;
 import gui.Main.MainPanel;
+import gui.Menu.MenuPrincipale;
+import model.KropkiSudoku;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +16,13 @@ import java.util.List;
 public class ListenerButtonSup implements MouseListener {
 
     private int indice;
-
+    private static final String STRINGONE="Kropki Sudoku.\n Come giocare:\nOgni riga deve contenere tutti i numeri" +
+            "da 1 ad n \nOgni colonna deve contenere tutti i numeri da 1 ad n \n" +
+            "Se tra due celle c'è un pallino blu i numeri nelle celle adiacenti devono essere consecutivi\n" +
+            "Se tra due celle c'è un pallino rosso i numeri nelle celle adiacenti devono essere uno il doppio dell'altro\n" +
+            "Se non c'è un pallino tra due celle i due numeri non devono essere né consecutivi né doppi\n" +
+            "Sviluppato da: Giovanni Rotondaro, Davide Ragona, Santo Locanto, Massimo Pio Iorio, Pietro Cofone, Elon Musk," +
+            "Bill Gates, Babbo Natale, i sassi, le luci... ";
     public ListenerButtonSup(int indice){
         this.indice=indice;
     }
@@ -46,6 +55,7 @@ public class ListenerButtonSup implements MouseListener {
                         GameManager.getInstance().getUserInput()[i][j] = newMatrix[i][j];
                     }
                 }
+                JOptionPane.showMessageDialog(MainPanel.finestraPrincipale, "Hinted :)");
                 break;
             case 3:
                 int[][] solvedMatrix =
@@ -56,6 +66,21 @@ public class ListenerButtonSup implements MouseListener {
                         GameManager.getInstance().getUserInput()[i][j] = solvedMatrix[i][j];
                     }
                 }
+                JOptionPane.showMessageDialog(MainPanel.finestraPrincipale, "Risolto :)");
+                break;
+            case 4:
+                int res = JOptionPane.showConfirmDialog(null, "Sei sicuro di voler uscire dal gioco?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                if(res == JOptionPane.YES_OPTION)
+                    System.exit(0);
+                break;
+            case 5:
+                System.out.println("Sto listenando");
+                MainPanel.finestraPrincipale.setContentPane(new MenuPrincipale());
+                MainPanel.finestraPrincipale.repaint();
+                MainPanel.finestraPrincipale.revalidate();
+                break;
+            case 6:
+                JOptionPane.showMessageDialog(MainPanel.finestraPrincipale, STRINGONE);
                 break;
         }
     }
