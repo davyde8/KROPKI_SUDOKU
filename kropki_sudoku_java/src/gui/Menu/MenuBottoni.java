@@ -83,7 +83,7 @@ public class MenuBottoni extends JButton implements MouseListener {
                 System.out.println(id);
 
                 MainPanel.finestraPrincipale.setContentPane(new PanelListGame(new KropkiSudoku(id)));
-                //MainPanel.finestraPrincipale.revalidate();
+                MainPanel.finestraPrincipale.revalidate();
                 break;
 
             case 2 :

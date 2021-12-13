@@ -157,11 +157,15 @@ public class KropkiSudoku {
 
     }
 
-    public boolean validate(int[][] userInput) {
+    public List<Integer[]> validate(int[][] userInput) {
+        List<Integer[]> notValidCells = new ArrayList<>();
         for (int i=0 ; i < userInput.length ; i++) {
             for(int j=0 ; j < userInput[0].length; j++) {
                 if (userInput[i][j] != 0 && userInput[i][j] != this.solvedMatrix[i][j] ) {
-                    return false;
+                    Integer[] tmp = new Integer[2];
+                    tmp[0] = i;
+                    tmp[1] = j;
+                    notValidCells.add(tmp);
                 }
             }
         }
@@ -193,7 +197,7 @@ public class KropkiSudoku {
         int[][] myMatrix = ks.getInitialMatrix();
         printMatrix(myMatrix);
         while (!ks.isComplete(myMatrix)){
-            if (ks.validate(myMatrix)) {
+            if (ks.validate(myMatrix).size() == 0) {
                 System.out.println("Validation OK");
                 myMatrix = ks.sendHint(myMatrix);
             }

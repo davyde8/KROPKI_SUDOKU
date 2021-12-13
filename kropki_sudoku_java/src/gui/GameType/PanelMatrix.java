@@ -13,14 +13,14 @@ public class PanelMatrix extends JPanel {
         this.nDimensionMatrix=nDimensionMatrix;
         this.setBackground(Color.WHITE);
 
-        matrix = new ComponentMatrix[nDimensionMatrix][nDimensionMatrix];
+        GameManager.getInstance().setMatrix(new ComponentMatrix[nDimensionMatrix][nDimensionMatrix]);
         for(int i=0;i<nDimensionMatrix;i++){
             for(int j=0;j<nDimensionMatrix;j++){
                 ComponentMatrix tmp=new ComponentMatrix(i,j);
-                tmp.settaNumero(String.valueOf(matrixBack[i][j]));
+                tmp.settaNumero(String.valueOf(matrixBack[j][i]));
                 tmp.setBackgroundCerchioDestra(findPoint(points,i,j,true));
                 tmp.setBackgroundCerchioSotto(findPoint(points,i,j,false));
-                matrix[i][j]= tmp;
+                GameManager.getInstance().getMatrix()[i][j]= tmp;
             }
         }
 
@@ -32,16 +32,16 @@ public class PanelMatrix extends JPanel {
         for(int i=0;i<nDimensionMatrix;i++){
             for(int j=0;j<nDimensionMatrix;j++){
                 if(i==nDimensionMatrix-1){
-                    matrix[j][i].setBackgroundCerchioSotto(Color.RED);
-                    matrix[j][i].settaInvisibileSotto();
+                    GameManager.getInstance().getMatrix()[j][i].setBackgroundCerchioSotto(Color.RED);
+                    GameManager.getInstance().getMatrix()[j][i].settaInvisibileSotto();
                 }
                 if(j==nDimensionMatrix-1){
-                    matrix[j][i].setBackgroundCerchioDestra(Color.BLUE);
-                    matrix[j][i].settaInvisibileDestra();
+                    GameManager.getInstance().getMatrix()[j][i].setBackgroundCerchioDestra(Color.BLUE);
+                    GameManager.getInstance().getMatrix()[j][i].settaInvisibileDestra();
                 }
                 griglia.gridx = i;
                 griglia.gridy = j;
-                this.add(matrix[i][j],griglia);
+                this.add(GameManager.getInstance().getMatrix()[i][j],griglia);
             }
         }
     }

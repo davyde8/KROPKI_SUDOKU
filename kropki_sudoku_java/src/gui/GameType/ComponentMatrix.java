@@ -116,4 +116,8 @@ public class ComponentMatrix extends JPanel {
         tmp.repaint();
         tmp.revalidate();
     }
+
+    public void setTextColor(Color color) {
+        this.numero.setBorder(BorderFactory.createLineBorder(color));
+    }
 }
