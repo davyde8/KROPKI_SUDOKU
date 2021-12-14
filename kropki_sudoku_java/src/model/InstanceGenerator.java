@@ -10,7 +10,7 @@ import java.util.Random;
 import static model.KropkiSudoku.SOLVER_PATH;
 
 public class InstanceGenerator {
-
+    public static final String MAC_PATH = "/Applications/MiniZincIDE.app/Contents/Resources/";
     public static final String MINIZINC_STATS = "minizinc --all-solutions -s ";
     public static final String MATRIX_COMPOSER = "resources/model/matrix_composer.mzn";
     public static final String DUMMY_INPUT = "resources/dummy_data/dummy_data.dzn";
@@ -24,7 +24,8 @@ public class InstanceGenerator {
         try{
 
             if(System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
-                process = Runtime.getRuntime().exec(MINIZINC_STATS+"--solver COIN-BC "+ SOLVER_PATH+" "+filename);
+                process = Runtime.getRuntime().exec(MAC_PATH+MINIZINC_STATS+"--solver Gecode "+ SOLVER_PATH+" "+filename);
+
             }
             else if(System.getProperty("os.name").contains("Windows")) {
                 System.out.println("Installa linux ;)");
