@@ -38,7 +38,7 @@ public class PanelComponentSup extends JPanel {
         this.add(check);
         rigidArea = Box. createRigidArea(new Dimension((Dimensioni.WIDTH/100)*4,0 ));
         this.add(rigidArea);
-        hint = impostaBottone("Hint.png");
+        hint = impostaBottone("hint.png");
         ListenerButtonSup hintListener=new ListenerButtonSup(2);
         hint.addMouseListener(hintListener);
         this.add(hint);
