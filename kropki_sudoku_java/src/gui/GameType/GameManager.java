@@ -7,6 +7,8 @@ public class GameManager {
     private static GameManager instance;
     private KropkiSudoku kropki;
     private int[][] userInput;
+    private ComponentMatrix [][]matrix;
+
 
     private GameManager(){}
 
@@ -33,4 +35,14 @@ public class GameManager {
     public void setUserInput(int[][] userInput) {
         this.userInput = userInput;
     }
+
+    public ComponentMatrix[][] getMatrix(){
+        return matrix;
+    }
+
+    public void setMatrix(ComponentMatrix [][] matrix) {
+        this.matrix = matrix;
+    }
+
+
 }

@@ -3,6 +3,7 @@ package gui.GameType;
 import gui.Dimensioni.Dimensioni;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -50,6 +51,11 @@ public class ComponentMatrix extends JPanel {
             @Override
             public void keyTyped(KeyEvent e) {
                 try {
+                    for (int i=0 ; i <GameManager.getInstance().getMatrix().length; i++) {
+                        for (int j=0 ; j < GameManager.getInstance().getMatrix()[0].length; j++) {
+                            GameManager.getInstance().getMatrix()[i][j].setTextColor(Color.BLACK);
+                        }
+                    }
                     System.out.println(e.getKeyChar()+"");
                     if(!(e.getKeyChar()+""=="")) {
                         int numeroLetto = Integer.parseInt(e.getKeyChar() + "");

@@ -169,7 +169,7 @@ public class KropkiSudoku {
                 }
             }
         }
-        return true;
+        return notValidCells;
     }
 
     public boolean isComplete(int[][] userInput) {

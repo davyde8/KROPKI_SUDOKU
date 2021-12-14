@@ -7,7 +7,7 @@ import java.util.List;
 public class PanelMatrix extends JPanel {
 
     private int nDimensionMatrix;
-    private ComponentMatrix [][]matrix;
+
 
     public PanelMatrix(int [][] matrixBack, List<Integer[]> points,int nDimensionMatrix){
         this.nDimensionMatrix=nDimensionMatrix;
