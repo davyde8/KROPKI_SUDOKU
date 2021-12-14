@@ -16,7 +16,7 @@ public class MinizincUtility {
             // Questo si può togliere perché tanto è uguale in tutti gli OS
 
             if(System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
-                process = Runtime.getRuntime().exec("minizinc --solver COIN-BC "+ solver+" "+data);
+                process = Runtime.getRuntime().exec("/Applications/MiniZincIDE.app/Contents/Resources/minizinc "+ solver+" "+data);
             }
             else if(System.getProperty("os.name").contains("Windows")) {
                 System.out.println("Installa linux ;)");
