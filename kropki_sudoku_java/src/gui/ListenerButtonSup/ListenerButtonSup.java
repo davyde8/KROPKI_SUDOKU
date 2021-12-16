@@ -21,8 +21,7 @@ public class ListenerButtonSup implements MouseListener {
             "Se tra due celle c'è un pallino blu i numeri nelle celle adiacenti devono essere consecutivi\n" +
             "Se tra due celle c'è un pallino rosso i numeri nelle celle adiacenti devono essere uno il doppio dell'altro\n" +
             "Se non c'è un pallino tra due celle i due numeri non devono essere né consecutivi né doppi\n" +
-            "Sviluppato da: Giovanni Rotondaro, Davide Ragona, Santo Locanto, Massimo Pio Iorio, Pietro Cofone, Elon Musk," +
-            "Bill Gates, Babbo Natale, i sassi, le luci... ";
+            "Sviluppato da: Giovanni Rotondaro, Davide Ragona, Santo Locanto, Massimo Pio Iorio, Pietro Cofone.";
     public ListenerButtonSup(int indice){
         this.indice=indice;
     }
